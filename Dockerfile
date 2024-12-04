@@ -4,16 +4,21 @@ FROM python:3.10-slim
 # Configurar o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copiar apenas o requirements.txt para o cache de build
+# Copiar apenas o arquivo requirements.txt para o container
 COPY requirements.txt .
 
-# Instalar as dependências no ambiente do container
+# Atualizar pip e instalar dependências
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copiar o código da aplicação para o container
+# Baixar o modelo ONNX do Google Drive
+RUN apt-get update && apt-get install -y wget
+RUN wget -O modelo_vit.onnx "https://drive.google.com/uc?id=1wHMYfley5JAqcSfSgEwE3mKUrk97_pP8&export=download"
+
+# Copiar o restante do projeto para o container
 COPY . .
 
-# Expor a porta para o FastAPI (por padrão, 8000)
+# Expor a porta para o FastAPI
 EXPOSE 8000
 
 # Comando para iniciar o servidor FastAPI
