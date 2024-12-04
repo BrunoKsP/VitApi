@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN mkdir -p ./modelo
 
 # Baixar o modelo do Google Drive para o diretório correto
-RUN wget -O ./modelo/modelo_vit.onnx "https://drive.google.com/uc?id=FILE_ID&export=download"
+RUN wget -O ./modelo/modelo_vit.onnx "https://drive.google.com/uc?id=1wHMYfley5JAqcSfSgEwE3mKUrk97_pP8&export=download"
 
 # Copiar o restante do código
 COPY . .
