@@ -13,10 +13,8 @@ app = FastAPI()
 # Caminho para o modelo ONNX
 model_path = "./modelo/modelo_vit.onnx"
 
-# Carregar o modelo ONNX
 session = ort.InferenceSession(model_path)
 
-# Função para pré-processar a imagem
 def preprocess_image(image):
     img = Image.open(image).convert("RGB")
     img = img.resize((224, 224))  # Redimensionar para 224x224
