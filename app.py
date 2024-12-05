@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import onnxruntime as ort
 from PIL import Image
@@ -16,6 +17,13 @@ model_path = "./modelo/modelo_vit.onnx"
 # Carregar o modelo ONNX
 session = ort.InferenceSession(model_path)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permite todas as origens (substitua por URLs específicas se necessário)
+    allow_credentials=True,
+    allow_methods=["*"],  # Permite todos os métodos HTTP
+    allow_headers=["*"],  # Permite todos os cabeçalhos
+)
 # Função para pré-processar a imagem
 def preprocess_image(image):
     img = Image.open(image).convert("RGB")
