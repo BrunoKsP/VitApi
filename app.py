@@ -14,7 +14,6 @@ app = FastAPI()
 # Caminho para o modelo ONNX
 model_path = "./modelo/modelo_vit.onnx"
 
-# Carregar o modelo ONNX
 session = ort.InferenceSession(model_path)
 
 app.add_middleware(
